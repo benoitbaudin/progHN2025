@@ -1,0 +1,149 @@
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="assets/CSS/style.css" >
+        <script src="assets/JS/main.js"></script>
+        <script src="assets/JS/canvasjs.min.js"></script>
+        <title>Benoit Baudin</title>
+        <link rel="icon" href="assets/img/bananeicn.png" type="image/icon type">
+
+</head>
+
+    <body>
+<div id="moi">
+<h1 align="center">Benoit Baudin</h1>
+<h2 align="center">Sciences du Langage</h2>
+</div>
+
+<div  id="images" ><img src=".\assets\img\Logo_Sorbonne_Nouvelle.png" width="20%" alt="logoSBN">
+<img src=".\assets\img\banane.png" width="10%" alt="Mon Avatar VRC"></div>
+
+
+<!-- Section à afficher/masquer -->
+
+<div id="aboutme" class="show">
+<p>Mon CV des trois dernières années :</p>
+<table border="1px">
+    <thead>
+        <tr><th>2024/2025</th><th>etudiant</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>2023-2024</td><td>etudiant</td></tr>
+        <tr><td>2022-2023</td><td>etudiant</td></tr>    
+    </tbody>
+</table>
+
+<p>Voici les cinq derniers livres que j'ai lu :</p>
+<ol>
+    <li><i>20 milles lieux sous les mers</i>, Jules Verne, e-book</li>
+    <li><i>Nineteen Eighty-Four</i>, George Orwell, e-book</li>
+    <li><i>Ravage</i>, Bargavel, e-book</li>
+    <li><i>Le Cycle de Dune, tome 1</i>, Frank Herbert, e-book</li>
+    <li><i>The Hitchhiker's Guide to the Galaxy</i>, Douglas Adams, e-book</li>
+</ol>
+</div>
+
+<div  id="bouton1" style="text-align: center;">
+<center><button id="button_aboutme" class="fade" onclick="showHide_aboutme()" >Cacher le CV</button></center> <!-- L'exemple utilisait <center> qui est dépassé. Remplacé par un text-align: center --><!-- crée une fonction qui affiche/cache l'aide, centrée.. -->
+</div>
+
+
+
+
+
+
+
+
+<br>
+<!-- Analyse des données dans un fichier -->
+<div id="container">
+    <h3 style="text-align:center;">Analyse des données dans un fichier</h3>
+    <div id="page-wrapper">
+<div>
+<button id="button_aide" class="fade" onclick="showHide_aide()">Afficher l'aide</button> <!-- le center fait tout beug, remplacé par CSS -->
+    <div id="aide_content" style="display:none;">
+        <p><i>Voici un mode d'emploi :</i>
+            <ul>
+                <li>Etape 1 : Chargez un texte au format .txt à l'aide du bouton Parcourir.</li>
+                <li>Etape 2 (facultatif) : Précisez les délimiteurs de votre choix puis cliquez sur le bouton Segmentation.</li>
+                <li>Le bouton Dictionnaire : permet d'obtenir un tableau qui classe les tokens de façon décroissante en fonction du nombre d'occurences.</li>
+                <li>Le bouton GREP : Entrez un pôle (une regex ou un mot) puis cliquez sur GREP pour obtenir le tableau des lignes d'occurences.</li>
+                <li>Le bouton Concordancier : Entrez un pôle (une regex ou un mot) et une longueur de contexte puis cliquez sur Concordancier pour obtenir un tableau avec le contexte gauche et droit du pôle recherché.</li>
+                <li>Le bouton Nombre de phrases : cliquez et il affichera le nombre de phrases.</li>
+                <li>Le bouton Mots les plus longs : cliquez et il affichera les 10 mots les plus longs du texte.</li>
+                <li>Le bouton Pie Chart : Saisissez des stopwords et cliquez sur le bouton pour afficher un graphique des 30 mots les plus fréquents dans le texte hors stopwords.</li>
+                <li>Le bouton /kujuj/ : ajoute uj comme suffixe à chaque mot du texte chargé...</li>
+            </ul>
+        </p>
+    </div>
+</div>
+</br>
+<div>
+    <span>
+        <label for="fileInput" class="btn"><small>Sélectionner un fichier au format .txt :</small></label>
+        <input id="fileInput" type="file" accept="text/plain" name="Fichier (.txt)" />
+    </span>
+</div>
+<br />
+<p style="text-align:center;">
+    <small>
+        <label for="delimID" class="mylabel">Délimiteur(s)</label>
+        &nbsp; <!-- commenter -->
+        <input type="text" value=" ,;’'~|&#@=`%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
+    </small>
+    <br />
+    <small>
+        <label for="poleID" class="mylabel">Pôle</label>
+        &nbsp;
+        <input type="text" placeholder="entrez un pôle..." name="pole" id="poleID" size="20" />
+    </small>
+    &nbsp;
+    <small>
+        <label for="lgID" class="mylabel">Longueur</label>
+        &nbsp;
+        <input type="text" value="10" name="lg" id="lgID" size="10" />
+    </small>
+    <br/>
+    <small>
+        <label for="stopwordID" class="mylabel">mots grammaticaux, Stopwords en anglais)</label>
+        &nbsp;
+        <input type="text" value="de,le,la,les,à,et,des,un,une,du,que,en,l,que,qu,d,s,se,ne,n,ce,me,sa" name="stopwords" id="stopwordID" size="60" />
+    </small>
+    <br />
+    <br />
+    <button class="special" onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button> <!-- commenter -->
+    <br />
+    <br />
+    <button onclick="segText()"><span>Segmentation</span></button>
+    <button class="purple" id="btnDict" onclick="dictionnaire()"><span>Dictionnaire</span></button>
+    <button class="fade" id="btnGrep" onclick="grep()"><span>GREP</span></button>
+    <button class="fade" onclick="concord()"><span>Concordancier</span></button>
+    <button class="fade" onclick="matrixify()"><span>Pilule Rouge</span></button>
+    <button class="fade" onclick="nbPhrases()"><span>Nombre de phrases</span></button>
+    <button class="fade" onclick="tokenLong()">Mots les plus longs</button>
+    <button class="fade" onclick="pieChart()"><span>grapheCamembert-Pie Chart</span></button>
+</p>
+</div>
+
+<div id="logger1" style="width:100%"></div>
+<div id="logger2" style="width:100%"></div>
+<div id="logger3" style="width:100%"></div>
+
+<br/>
+<div id="Global">
+<div id="fileDisplayArea"></div>
+<div id="page-analysis"></div>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+</div>
+</div>
+
+
+<footer>
+
+  <p><a href="http://www.univ-paris3.fr/">Lien vers le site de Sorbonne Nouvelle.</a></p>
+
+</footer>
+    
+
+</body>
+</html>
